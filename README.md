@@ -1,2 +1,2 @@
 # tictactoe
-This App is a demionstration for APCSP students.
+This App is a demonstration for APCSP students.
