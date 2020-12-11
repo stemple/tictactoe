@@ -29,7 +29,7 @@ TicTacToeApp = {
                }
                // Add the onclick event handler
                cell.element.onclick = function() {
-                TicTacToeApp.markCell(cell);
+                   TicTacToeApp.markCell(cell);
                }
                // Add the cell to the board's cells array
                this.cells.push(cell);
@@ -58,9 +58,10 @@ TicTacToeApp = {
     // Handles the clicking of a cell
     // TODO: check if cell is already marked - mark only if empty, then change mark state
     markCell: function(cell) {
+        console.log("Attempting to mark cell", cell);
         if(cell.mark == "") {
             // cell is unmarked, then mark it with current player
-            cell.mark = this.players[this.turn % 2]
+            cell.mark = this.players[this.turn % 2].mark;
             this.turn = this.turn + 1;
         } else {
             // do nothing - don't change the mark
@@ -71,7 +72,7 @@ TicTacToeApp = {
     renderCells: function() {
         for(let i = 0; i < this.board.cells.length; i++) {
             cell = this.board.cells[i];
-            cell.textContent = cell.mark;
+            cell.element.textContent = cell.mark;
         }
     },
 
