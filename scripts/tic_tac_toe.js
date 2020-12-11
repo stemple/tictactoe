@@ -4,7 +4,7 @@ TicTacToeApp = {
     turn: 0,
 
     // Not sure if I need this, but tells me if game is being played.
-    gameState: 0,
+    gameStarted: false,
     
     board: {
 
@@ -25,7 +25,7 @@ TicTacToeApp = {
                let cell = {
                    pos: i,
                    mark: "",
-                   element: cellDiv
+                   element: cellDiv,
                }
                // Add the onclick event handler
                cell.element.onclick = function() {
@@ -51,18 +51,33 @@ TicTacToeApp = {
     
     // A function for starting the game
     startGame: function() {
-      ++turn;
+      this.gameStarted = true;
+      this.turn = this.turn + 1;
     },
 
     // Handles the clicking of a cell
     // TODO: check if cell is already marked - mark only if empty, then change mark state
     markCell: function(cell) {
-        console.log(cell.pos);
+        if(cell.mark == "") {
+            // cell is unmarked, then mark it with current player
+            cell.mark = this.players[this.turn % 2]
+            this.turn = this.turn + 1;
+        } else {
+            // do nothing - don't change the mark
+        }
+        this.renderCells();
+    },
+
+    renderCells: function() {
+        for(let i = 0; i < this.board.cells.length; i++) {
+            cell = this.board.cells[i];
+            cell.textContent = cell.mark;
+        }
     },
 
     // Check to see if someone wins - this is going to be our main algorithm
     checkForWin: function() {
-
+        return false;
     },
 
 }
