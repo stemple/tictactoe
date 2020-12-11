@@ -6,6 +6,7 @@ TicTacToeApp = {
     // Not sure if I need this, but tells me if game is being played.
     gameStarted: false,
     
+    // This is the board object
     board: {
 
         // contains all the cells on the board
@@ -30,6 +31,7 @@ TicTacToeApp = {
                // Add the onclick event handler
                cell.element.onclick = function() {
                    TicTacToeApp.markCell(cell);
+                   TicTacToeApp.renderCells();
                }
                // Add the cell to the board's cells array
                this.cells.push(cell);
@@ -66,7 +68,6 @@ TicTacToeApp = {
         } else {
             // do nothing - don't change the mark
         }
-        this.renderCells();
     },
 
     renderCells: function() {
