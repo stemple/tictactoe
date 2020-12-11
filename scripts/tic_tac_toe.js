@@ -12,6 +12,13 @@ TicTacToeApp = {
         // contains all the cells on the board
         cells: [],
 
+        render: function() {
+            for(let i = 0; i < this.cells.length; i++) {
+                cell = this.cells[i];
+                cell.element.textContent = cell.mark;
+            }
+        },
+
         // function for creating cells
         createCells: function() {
             // Create grid of 3 x 3 cells
@@ -29,9 +36,10 @@ TicTacToeApp = {
                    element: cellDiv,
                }
                // Add the onclick event handler
+               // mark the cell and then render board
                cell.element.onclick = function() {
                    TicTacToeApp.markCell(cell);
-                   TicTacToeApp.renderCells();
+                   TicTacToeApp.board.render();
                }
                // Add the cell to the board's cells array
                this.cells.push(cell);
@@ -67,13 +75,6 @@ TicTacToeApp = {
             this.turn = this.turn + 1;
         } else {
             // do nothing - don't change the mark
-        }
-    },
-
-    renderCells: function() {
-        for(let i = 0; i < this.board.cells.length; i++) {
-            cell = this.board.cells[i];
-            cell.element.textContent = cell.mark;
         }
     },
 
