@@ -33,6 +33,7 @@ TicTacToeApp = {
             // Create grid of 3 x 3 cells
             // Each cell has to have a position and mark state (empty, x or o)
             // These are divs - we need to add a onclick event handler
+            cells = [];
             let playArea = document.getElementById("board"); 
             for(let i = 0; i < 9; i++) {
                let cellDiv = document.createElement("div");
@@ -51,8 +52,9 @@ TicTacToeApp = {
                    TicTacToeApp.markCell(cell);
                }
                // Add the cell to the board's cells array
-               this.cells.push(cell);
+               cells.push(cell);
             }
+            return cells;
         }
 
     },
@@ -71,7 +73,7 @@ TicTacToeApp = {
         }.bind(TicTacToeApp);
         
         // Build the board
-        this.board.createCells();
+        this.board.cells = this.board.createCells();
     },
     
     // A function for starting the game
@@ -138,11 +140,12 @@ TicTacToeApp = {
         // Check if row, column or diagonal totals = -3 or +3
         if (r1 == 3 || r2 == 3 || r3 == 3 || c1 == 3 || c2 == 3 || c3 == 3 || d1 == 3 || d2 == 3) {
             // X wins.
-
-            this.win(this.players[0]);
+            ++this.players[0].score;
+            this.endGame();
         } else if (r1  == -3 || r2  == -3 || r3  == -3 || c1  == -3 || c2  == -3 || c3  == -3 || d1 == -3 || d2 == -3) {
             // O wins
-            this.win(this.players[1]);
+            ++this.players[1].score;
+            this.endGame();
         }
 
     },
@@ -152,11 +155,6 @@ TicTacToeApp = {
         if(this.turn == 9) {
             this.endGame();
         }
-    },
-
-    win: function(player) {
-        ++player.score;
-        this.endGame();
     },
 
 }
