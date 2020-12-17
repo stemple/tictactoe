@@ -49,12 +49,6 @@ TicTacToeApp = {
                cell.element.onclick = function() {
                    // Mark the cell
                    TicTacToeApp.markCell(cell);
-                   // Render the board
-                   TicTacToeApp.board.render();
-                   // Check for win
-                   TicTacToeApp.checkForWin();
-                   // Check for Tie
-                   TicTacToeApp.checkForTie();
                }
                // Add the cell to the board's cells array
                this.cells.push(cell);
@@ -117,6 +111,15 @@ TicTacToeApp = {
         } else {
             // do nothing - don't change the mark
         }
+        this.board.render();
+        this.checkGame();
+    },
+
+    checkGame: function() {
+        // Check for win
+        this.checkForWin();
+        // Check for Tie
+        this.checkForTie();
     },
 
     // Check to see if someone wins - this is going to be our main algorithm
@@ -141,8 +144,6 @@ TicTacToeApp = {
             // O wins
             this.win(this.players[1]);
         }
-        console.log("diagonal 1", d1);
-        console.log("diagonal 2", d2);
 
     },
 
